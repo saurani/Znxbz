@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>शुभ दीपावली</title>
+  <link href="https://fonts.googleapis.com/css2?family=Hind:wght@400;600&family=Yatra+One&display=swap" rel="stylesheet"/>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: 'Hind', sans-serif;
+      background: radial-gradient(ellipse at center, #2B0A05 0%, #1a0502 100%);
+      color: #FFD700;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: start;
+      padding: 30px 20px 160px;
+    }
+    .container {
+      background-color: rgba(43,10,5,0.85);
+      border: 3px solid #FFD700; /* Updated border */
+      border-radius: 20px;        /* More rounded */
+      padding: 25px 18px;
+      width: 100%;
+      max-width: 440px;
+      text-align: center;
+      box-shadow: 0 0 25px rgba(255, 215, 0, 0.4); /* Glowing effect */
+      animation: fadeInUp 1s ease;
+    }
+
+    h2 {
+      font-size: 1.2rem;
+      margin-bottom: 16px;
+      animation: fadeInDown 1s ease;
+    }
+
+    #selectedImage {
+      width: 100%;
+      max-height: 320px;
+      border-radius: 12px;
+      border: 3px solid #FFD700;
+      margin-bottom: 16px;
+      object-fit: cover;
+      object-position: center top;
+      animation: fadeIn 1.5s ease;
+    }
+
+    h1 {
+      font-family: 'Yatra One', cursive;
+      font-size: 1.6rem;
+      color: #FFD700;
+      margin-bottom: 16px;
+      animation: fadeIn 2s ease;
+    }
+
+    input[type="text"] {
+      width: 100%;
+      padding: 10px;
+      border-radius: 8px;
+      border: 2px solid #FFD700;
+      font-size: 1rem;
+      margin-bottom: 10px;
+      background-color: #FDF1C7;
+      color: #000;
+      animation: fadeIn 2.2s ease;
+    }
+
+    #previewBlock {
+      margin-bottom: 12px;
+      font-weight: bold;
+      color: #FFD700;
+      animation: fadeIn 2.4s ease;
+    }
+
+    .social-buttons {
+      display: flex;
+      justify-content: space-between;
+      gap: 6px;
+      margin-top: 10px;
+      flex-wrap: wrap;
+      animation: fadeIn 2.6s ease;
+    }
+
+    .mini-btn {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      padding: 8px 10px;
+      font-size: 0.9rem;
+      border: none;
+      border-radius: 8px;
+      font-weight: bold;
+      cursor: pointer;
+      font-family: 'Hind', sans-serif;
+      transition: 0.3s;
+    }
+
+    .mini-btn img {
+      width: 18px;
+      height: 18px;
+    }
+
+    .mini-btn:nth-child(1) {
+      background-color: #075E54;
+      color: #ffffff;
+    }
+
+    .mini-btn:nth-child(2) {
+      background-color: #002B5B;
+      color: #ffffff;
+    }
+
+    .mini-btn:nth-child(3) {
+      background-color: #000000;
+      color: #FFD700;
+    }
+
+    .mini-btn:hover {
+      opacity: 0.9;
+    }
+
+    #generatedLinkBlock {
+      margin-top: 10px;
+      display: none;
+      animation: fadeIn 2.8s ease;
+    }
+
+    #generatedLink {
+      width: 100%;
+      padding: 9px;
+      font-size: 0.9rem;
+      border-radius: 8px;
+      border: none;
+    }
+
+    /* Diya GIF Styles - Large + Glowing */
+    .diya-gif {
+      position: fixed;
+      width: 160px;
+      height: auto;
+      z-index: 1000;
+      pointer-events: none;
+      animation: glow 2s ease-in-out infinite alternate;
+    }
+
+    .bottom-left {
+      bottom: 10px;
+      left: 10px;
+    }
+
+    .bottom-right {
+      bottom: 10px;
+      right: 10px;
+    }
+
+    /* Animations */
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fadeInDown {
+      from { opacity: 0; transform: translateY(-30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes glow {
+      from { opacity: 0.6; transform: scale(1); }
+      to { opacity: 1; transform: scale(1.1); }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- Top fixed greeting -->
+    <h2>🎉 दीपावली की हार्दिक शुभकामनाएं 🎉</h2>
+
+    <!-- Image -->
+    <img id="selectedImage" src="https://img.freepik.com/free-vector/goddess-maa-laxmi-with-coins-indian-festival-dhanteras-background_1302-8518.jpg" alt="लक्ष्मी माता" />
+
+    <!-- Dynamic greeting will be here -->
+    <h1 id="mainGreeting">शुभ दीपावली</h1>
+
+    <!-- Name input -->
+    <input type="text" id="senderName" placeholder="यहाँ अपना नाम लिखें" oninput="updatePreview()" />
+    <div id="previewBlock"></div>
+
+    <!-- Social Buttons -->
+    <div class="social-buttons">
+      <button class="mini-btn" onclick="shareLink('whatsapp')">
+        <img src="https://cdn-icons-png.flaticon.com/512/733/733585.png" alt="WhatsApp"> WhatsApp
+      </button>
+      <button class="mini-btn" onclick="shareLink('facebook')">
+        <img src="https://cdn-icons-png.flaticon.com/512/733/733547.png" alt="Facebook"> Facebook
+      </button>
+      <button class="mini-btn" onclick="copyGeneratedLinkDirect()">
+        <img src="https://cdn-icons-png.flaticon.com/512/1828/1828911.png" alt="Copy"> कॉपी लिंक
+      </button>
+    </div>
+
+    <!-- Generated Link Block -->
+    <div id="generatedLinkBlock">
+      <input type="text" id="generatedLink" readonly />
+    </div>
+  </div>
+
+  <!-- Decorative Diya GIFs in both bottom corners -->
+  <img src="your-diya.gif" class="diya-gif bottom-left" alt="दीया" />
+  <img src="your-diya.gif" class="diya-gif bottom-right" alt="दीया" />
+
+  <script>
+    function generateLink() {
+      const name = document.getElementById('senderName').value.trim();
+      const img = document.getElementById('selectedImage').src;
+      if (!name) {
+        alert('कृपया अपना नाम डालें');
+        return null;
+      }
+      return `${window.location.href.split('?')[0]}?sender=${encodeURIComponent(name)}&img=${encodeURIComponent(img)}`;
+    }
+
+    function copyGeneratedLinkDirect() {
+      const link = generateLink();
+      if (!link) return;
+      const input = document.getElementById('generatedLink');
+      const block = document.getElementById('generatedLinkBlock');
+      input.value = link;
+      block.style.display = 'block';
+      input.select();
+      input.setSelectionRange(0, 99999);
+      document.execCommand("copy");
+      alert("लिंक कॉपी हो गया!");
+    }
+
+    function shareLink(platform) {
+      const link = generateLink();
+      if (!link) return;
+      const message = encodeURIComponent(link);
+      const isMobile = /iPhone|Android/i.test(navigator.userAgent);
+
+      if (platform === 'whatsapp') {
+        if (isMobile) {
+          window.location.href = `intent://send?text=${message}#Intent;package=com.whatsapp;scheme=whatsapp;end`;
+        } else {
+          window.open(`https://web.whatsapp.com/send?text=${message}`, '_blank');
+        }
+      } else if (platform === 'facebook') {
+        if (isMobile) {
+          window.location.href = `intent://share?text=${message}#Intent;package=com.facebook.katana;scheme=facebook;end`;
+        } else {
+          window.open(`https://www.facebook.com/sharer/sharer.php?u=${message}`, '_blank');
+        }
+      }
+    }
+
+    function updatePreview() {
+      const name = document.getElementById('senderName').value.trim();
+      if (name) {
+        document.getElementById('previewBlock').textContent = `शुभकामनाएं भेजने वाले: ${name}`;
+      } else {
+        document.getElementById('previewBlock').textContent = '';
+      }
+    }
+
+    window.onload = () => {
+      const params = new URLSearchParams(window.location.search);
+      const sender = params.get('sender');
+      const img = params.get('img');
+      if (sender && img) {
+        document.getElementById('mainGreeting').textContent = `🎉 दीपावली की शुभकामनाएं - ${decodeURIComponent(sender)} की ओर से 🎉`;
+        document.getElementById('selectedImage').src = img;
+      }
+    }
+  </script>
+</body>
+</html>
