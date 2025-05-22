@@ -24,41 +24,39 @@
     }
     .container {
       background-color: rgba(43,10,5,0.85);
-      border: 3px solid #FFD700; /* Updated border */
-      border-radius: 20px;        /* More rounded */
+      border: 3px solid #FFD700;
+      border-radius: 20px;
       padding: 25px 18px;
       width: 100%;
       max-width: 440px;
       text-align: center;
-      box-shadow: 0 0 25px rgba(255, 215, 0, 0.4); /* Glowing effect */
+      box-shadow: 0 0 25px rgba(255, 215, 0, 0.4);
       animation: fadeInUp 1s ease;
     }
-
-    h2 {
-      font-size: 1.2rem;
-      margin-bottom: 16px;
+    h1 {
+      font-family: 'Yatra One', cursive;
+      font-size: 1.8rem;
+      color: #FFD700;
+      margin-bottom: 18px;
       animation: fadeInDown 1s ease;
     }
-
     #selectedImage {
       width: 100%;
       max-height: 320px;
       border-radius: 12px;
       border: 3px solid #FFD700;
-      margin-bottom: 16px;
+      margin-bottom: 14px;
       object-fit: cover;
       object-position: center top;
       animation: fadeIn 1.5s ease;
     }
-
-    h1 {
-      font-family: 'Yatra One', cursive;
-      font-size: 1.6rem;
+    #senderMessage {
+      font-size: 1.1rem;
+      font-weight: bold;
       color: #FFD700;
-      margin-bottom: 16px;
-      animation: fadeIn 2s ease;
+      margin-bottom: 18px;
+      animation: fadeIn 1.6s ease;
     }
-
     input[type="text"] {
       width: 100%;
       padding: 10px;
@@ -68,25 +66,21 @@
       margin-bottom: 10px;
       background-color: #FDF1C7;
       color: #000;
-      animation: fadeIn 2.2s ease;
+      animation: fadeIn 2s ease;
     }
-
     #previewBlock {
       margin-bottom: 12px;
       font-weight: bold;
       color: #FFD700;
-      animation: fadeIn 2.4s ease;
     }
-
     .social-buttons {
       display: flex;
       justify-content: space-between;
       gap: 6px;
       margin-top: 10px;
       flex-wrap: wrap;
-      animation: fadeIn 2.6s ease;
+      animation: fadeIn 2.2s ease;
     }
-
     .mini-btn {
       flex: 1;
       display: flex;
@@ -102,37 +96,29 @@
       font-family: 'Hind', sans-serif;
       transition: 0.3s;
     }
-
     .mini-btn img {
       width: 18px;
       height: 18px;
     }
-
     .mini-btn:nth-child(1) {
       background-color: #075E54;
       color: #ffffff;
     }
-
     .mini-btn:nth-child(2) {
       background-color: #002B5B;
       color: #ffffff;
     }
-
     .mini-btn:nth-child(3) {
       background-color: #000000;
       color: #FFD700;
     }
-
     .mini-btn:hover {
       opacity: 0.9;
     }
-
     #generatedLinkBlock {
       margin-top: 10px;
       display: none;
-      animation: fadeIn 2.8s ease;
     }
-
     #generatedLink {
       width: 100%;
       padding: 9px;
@@ -141,7 +127,6 @@
       border: none;
     }
 
-    /* Diya GIF Styles - Large + Glowing */
     .diya-gif {
       position: fixed;
       width: 160px;
@@ -150,33 +135,27 @@
       pointer-events: none;
       animation: glow 2s ease-in-out infinite alternate;
     }
-
     .bottom-left {
       bottom: 10px;
       left: 10px;
     }
-
     .bottom-right {
       bottom: 10px;
       right: 10px;
     }
 
-    /* Animations */
     @keyframes fadeInUp {
       from { opacity: 0; transform: translateY(30px); }
       to { opacity: 1; transform: translateY(0); }
     }
-
     @keyframes fadeInDown {
       from { opacity: 0; transform: translateY(-30px); }
       to { opacity: 1; transform: translateY(0); }
     }
-
     @keyframes fadeIn {
       from { opacity: 0; }
       to { opacity: 1; }
     }
-
     @keyframes glow {
       from { opacity: 0.6; transform: scale(1); }
       to { opacity: 1; transform: scale(1.1); }
@@ -185,20 +164,15 @@
 </head>
 <body>
   <div class="container">
-    <!-- Top fixed greeting -->
-    <h2>🎉 दीपावली की हार्दिक शुभकामनाएं 🎉</h2>
+    <h1>🌟 शुभ दीपावली 🌟</h1>
 
-    <!-- Image -->
     <img id="selectedImage" src="https://img.freepik.com/free-vector/goddess-maa-laxmi-with-coins-indian-festival-dhanteras-background_1302-8518.jpg" alt="लक्ष्मी माता" />
 
-    <!-- Dynamic greeting will be here -->
-    <h1 id="mainGreeting">शुभ दीपावली</h1>
+    <div id="senderMessage"></div>
 
-    <!-- Name input -->
     <input type="text" id="senderName" placeholder="यहाँ अपना नाम लिखें" oninput="updatePreview()" />
     <div id="previewBlock"></div>
 
-    <!-- Social Buttons -->
     <div class="social-buttons">
       <button class="mini-btn" onclick="shareLink('whatsapp')">
         <img src="https://cdn-icons-png.flaticon.com/512/733/733585.png" alt="WhatsApp"> WhatsApp
@@ -211,13 +185,11 @@
       </button>
     </div>
 
-    <!-- Generated Link Block -->
     <div id="generatedLinkBlock">
       <input type="text" id="generatedLink" readonly />
     </div>
   </div>
 
-  <!-- Decorative Diya GIFs in both bottom corners -->
   <img src="your-diya.gif" class="diya-gif bottom-left" alt="दीया" />
   <img src="your-diya.gif" class="diya-gif bottom-right" alt="दीया" />
 
@@ -280,7 +252,8 @@
       const sender = params.get('sender');
       const img = params.get('img');
       if (sender && img) {
-        document.getElementById('mainGreeting').textContent = `🎉 दीपावली की शुभकामनाएं - ${decodeURIComponent(sender)} की ओर से 🎉`;
+        document.getElementById('senderMessage').textContent =
+          `🎉 ${decodeURIComponent(sender)} की ओर से दीपावली की हार्दिक शुभकामनाएं 🎉`;
         document.getElementById('selectedImage').src = img;
       }
     }
